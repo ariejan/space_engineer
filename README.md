@@ -11,3 +11,7 @@ A nice project to toy around with Flutter, and also a cool game to waste your ti
 ## Contributors
 
   * Ariejan de Vroom <https://www.devroom.io>
+
+## License
+
+All code is licensed under the [MPLv2 License](https://github.com/ariejan/space_engineer/blob/master/LICENSE).
