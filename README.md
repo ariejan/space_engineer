@@ -2,7 +2,7 @@
 
 Conquer the galaxy, one click at a time!
 
-![Flutter Test](https://github.com/ariejan/space_engineer/workflows/Flutter%20Test/badge.svg?branch=master)
+![Tests](https://github.com/ariejan/space_engineer/workflows/Tests/badge.svg?branch=master)
 
 ## What the heck is this? 
 
