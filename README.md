@@ -1,16 +1,13 @@
-# space_engineer
+# Space Engineer
 
-The blackhole of clicker games...
+Conquer the galaxy, one click at a time!
 
-## Getting Started
+![Flutter Test](https://github.com/ariejan/space_engineer/workflows/Flutter%20Test/badge.svg?branch=master)
 
-This project is a starting point for a Flutter application.
+## What the heck is this? 
 
-A few resources to get you started if this is your first Flutter project:
+A nice project to toy around with Flutter, and also a cool game to waste your time. 
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## Contributors
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+  * Ariejan de Vroom <https://www.devroom.io>
