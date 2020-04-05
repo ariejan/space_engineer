@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:redux/redux.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:redux_logging/redux_logging.dart';
 import 'package:space_engineer/models/models.dart';
 import 'package:space_engineer/reducers/app_reducers.dart';
 import 'home_screen.dart';
@@ -9,6 +10,9 @@ void main() {
   final store = Store<AppState>(
     appReducer,
     initialState: AppState(resources: 0, asteroids: 1),
+    middleware: [
+      new LoggingMiddleware.printer(),
+    ]
   );
 
   runApp(StoreProvider(store: store, child: SpaceEngineerApp()));
