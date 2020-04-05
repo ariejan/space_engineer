@@ -1,10 +1,26 @@
 import 'package:flutter/material.dart';
-import 'home_screen.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:redux/redux.dart';
+import 'package:space_engineer/redux/app/app_state.dart';
+import 'package:space_engineer/redux/store.dart';
 
-void main() => runApp(SpaceEngineerApp());
+import 'ui/home/home.dart';
 
-class SpaceEngineerApp extends StatelessWidget {
+void main() async {
+  var store = await createStore();
+  runApp(AppWidget(store));
+}
 
+class AppWidget extends StatefulWidget {
+  final Store<AppState> store;
+
+  AppWidget(this.store);
+
+  @override
+  _AppWidget createState() => _AppWidget();
+}
+
+class _AppWidget extends State<AppWidget> {
   ThemeData _theme() {
     return ThemeData(
       brightness: Brightness.dark,
@@ -15,10 +31,13 @@ class SpaceEngineerApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Space Engineer',
-      theme: _theme(),
-      home: HomeScreen(),
+    return new StoreProvider<AppState>(
+      store: widget.store,
+      child: MaterialApp(
+        title: 'Space Engineer',
+        theme: _theme(),
+        home: Home(),
+      )
     );
   }
 }
