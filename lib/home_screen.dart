@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:redux/redux.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:space_engineer/actions/actions.dart';
+
+import 'models/app_state.dart';
 
 class HomeScreen extends StatefulWidget {
   final String _title = "Space Engineer";
@@ -9,45 +14,44 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _resources = 0;
-  int _astroids = 1;
-
-  void _mineAstroids() {
-    setState(() {
-      _resources += _randomMiningYield(_astroids);
-    });
-  }
-
-  int _randomMiningYield(int astroids) {
-    return astroids * 10;
-  }
-
   Widget _buildIncrementButton(BuildContext context) {
-    return Align(
-      alignment: Alignment.bottomCenter,
-      child: FlatButton(
-        onPressed: _mineAstroids,
-        padding: const EdgeInsets.fromLTRB(24.0, 24.0, 24.0, 36.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Container(
-              child: FaIcon(FontAwesomeIcons.sun, size: 28.0),
-              padding: const EdgeInsets.only(right: 8.0),
-            ),
-            Text(
-              _astroids == 1 ? "Mine 1 astroid" : "Mine $_astroids astroids",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 18.0,
-              )
-            ),
-          ],
-        ),
-        color: Colors.amber,
-        textColor: Colors.black,
-      )
+    return StoreConnector<AppState, int> (
+      converter: (Store<AppState> store) => store.state.asteroids,
+      builder: (BuildContext context, int asteroids) {
+        return Align(
+            alignment: Alignment.bottomCenter,
+            child: FlatButton(
+              onPressed: () => StoreProvider.of<AppState>(context).dispatch(MineAsteroidsAction(asteroids)),
+              padding: const EdgeInsets.fromLTRB(24.0, 24.0, 24.0, 36.0),
+              child: StoreConnector<AppState, int>(
+                converter: (Store<AppState> store) => store.state.asteroids,
+                builder: (BuildContext context, int asteroids) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                        child: FaIcon(FontAwesomeIcons.sun, size: 28.0),
+                        padding: const EdgeInsets.only(right: 8.0),
+                      ),
+                      Text(
+                          asteroids == 1 ? "Mine 1 astroid" : "Mine $asteroids astroids",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18.0,
+                          )
+                      ),
+                    ],
+                  );
+                },
+              ),
+              color: Colors.amber,
+              textColor: Colors.black,
+            )
+          );
+      }
     );
+
+
   }
 
   @override
@@ -56,32 +60,37 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: Text(widget._title),
       ),
-      body: Column(
-        children: <Widget>[
-          Container(
-            padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                Container(
-                  child: FaIcon(FontAwesomeIcons.atom, size: 16.0),
-                  padding: const EdgeInsets.only(right: 8.0),
+      body: StoreConnector<AppState, int>(
+        converter: (Store<AppState> store) => store.state.resources,
+        builder: (BuildContext context, int resources) {
+          return Column(
+            children: <Widget>[
+              Container(
+                padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    Container(
+                      child: FaIcon(FontAwesomeIcons.atom, size: 16.0),
+                      padding: const EdgeInsets.only(right: 8.0),
+                    ),
+                    Text(
+                        "$resources",
+                        style: TextStyle(
+                          fontSize: 18.0,
+                        )
+                    )
+                  ],
                 ),
-                Text(
-                  "$_resources",
-                  style: TextStyle(
-                    fontSize: 18.0,
-                  )
-                )
-              ],
-            ),
-          ),
-          Expanded(
-            flex: 10,
-            child: Text("TODO"),
-          ),
-          _buildIncrementButton(context),
-        ],
+              ),
+              Expanded(
+                flex: 10,
+                child: Text("TODO"),
+              ),
+              _buildIncrementButton(context),
+            ],
+          );
+        },
       ),
     );
   }

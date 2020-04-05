@@ -5,15 +5,23 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import 'package:redux/redux.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:space_engineer/models/models.dart';
+import 'package:space_engineer/reducers/app_reducers.dart';
 import 'package:space_engineer/main.dart';
 
 void main() {
   testWidgets('Counter increment score by 10', (WidgetTester tester) async {
+    final store = Store<AppState>(
+      appReducer,
+      initialState: AppState(resources: 0, asteroids: 1),
+    );
+
     // Build our app and trigger a frame.
-    await tester.pumpWidget(SpaceEngineerApp());
+    await tester.pumpWidget(StoreProvider(store: store, child: SpaceEngineerApp()));
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);
