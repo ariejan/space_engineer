@@ -1,25 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:redux/redux.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:redux_logging/redux_logging.dart';
-import 'package:space_engineer/models/models.dart';
-import 'package:space_engineer/reducers/app_reducers.dart';
-import 'home_screen.dart';
+import 'package:redux/redux.dart';
+import 'package:space_engineer/redux/app/app_state.dart';
+import 'package:space_engineer/redux/store.dart';
 
-void main() {
-  final store = Store<AppState>(
-    appReducer,
-    initialState: AppState(resources: 0, asteroids: 1),
-    middleware: [
-      new LoggingMiddleware.printer(),
-    ]
-  );
+import 'ui/home/home.dart';
 
-  runApp(StoreProvider(store: store, child: SpaceEngineerApp()));
+void main() async {
+  var store = await createStore();
+  runApp(AppWidget(store));
 }
 
-class SpaceEngineerApp extends StatelessWidget {
+class AppWidget extends StatefulWidget {
+  final Store<AppState> store;
 
+  AppWidget(this.store);
+
+  @override
+  _AppWidget createState() => _AppWidget();
+}
+
+class _AppWidget extends State<AppWidget> {
   ThemeData _theme() {
     return ThemeData(
       brightness: Brightness.dark,
@@ -30,10 +31,13 @@ class SpaceEngineerApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Space Engineer',
-      theme: _theme(),
-      home: HomeScreen(),
+    return new StoreProvider<AppState>(
+      store: widget.store,
+      child: MaterialApp(
+        title: 'Space Engineer',
+        theme: _theme(),
+        home: Home(),
+      )
     );
   }
 }

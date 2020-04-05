@@ -9,19 +9,19 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:redux/redux.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:space_engineer/models/models.dart';
-import 'package:space_engineer/reducers/app_reducers.dart';
 import 'package:space_engineer/main.dart';
+import 'package:space_engineer/redux/app/app_reducers.dart';
+import 'package:space_engineer/redux/app/app_state.dart';
 
 void main() {
   testWidgets('Counter increment score by 10', (WidgetTester tester) async {
     final store = Store<AppState>(
       appReducer,
-      initialState: AppState(resources: 0, asteroids: 1),
+      initialState: AppState.initial(),
     );
 
     // Build our app and trigger a frame.
-    await tester.pumpWidget(StoreProvider(store: store, child: SpaceEngineerApp()));
+    await tester.pumpWidget(StoreProvider(store: store, child: AppWidget(store)));
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);
