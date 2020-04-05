@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:redux/redux.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:space_engineer/redux/game/game_actions.dart';
 
 import '../../redux/app/app_state.dart';
 import 'home_viewmodel.dart';
@@ -18,29 +16,36 @@ class _HomeState extends State<Home> {
 
   Widget _buildIncrementButton({
     int numberOfAsteroids,
+    bool miningOnCooldown,
+    double miningCooldownFraction,
     Function() mineAsteroids,
   }) {
     return Align(
         alignment: Alignment.bottomCenter,
         child: FlatButton(
-          onPressed: mineAsteroids,
+          onPressed: miningOnCooldown ? null : mineAsteroids,
           padding: const EdgeInsets.fromLTRB(24.0, 24.0, 24.0, 36.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Container(
-                child: FaIcon(FontAwesomeIcons.sun, size: 28.0),
-                padding: const EdgeInsets.only(right: 8.0),
-              ),
-              Text(
-                numberOfAsteroids == 1 ? "Mine 1 astroid" : "Mine $numberOfAsteroids astroids",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18.0,
+          child: miningOnCooldown
+              ?
+                CircularProgressIndicator(
+                  value: miningCooldownFraction,
                 )
+              : Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    child: FaIcon(FontAwesomeIcons.sun, size: 28.0),
+                    padding: const EdgeInsets.only(right: 8.0),
+                  ),
+                  Text(
+                    numberOfAsteroids == 1 ? "Mine 1 astroid" : "Mine $numberOfAsteroids astroids",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18.0,
+                    )
+                  ),
+                ],
               ),
-            ],
-          ),
           color: Colors.amber,
           textColor: Colors.black,
         )
@@ -76,6 +81,8 @@ class _HomeState extends State<Home> {
           ),
           _buildIncrementButton(
             numberOfAsteroids: viewModel.numberOfAsteroids,
+            miningOnCooldown: viewModel.miningOnCooldown,
+            miningCooldownFraction: viewModel.miningCooldownFraction,
             mineAsteroids: viewModel.mineAsteroids,
           ),
         ],

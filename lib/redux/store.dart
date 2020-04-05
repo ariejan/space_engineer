@@ -1,16 +1,23 @@
 import 'dart:async';
 import 'package:redux_logging/redux_logging.dart';
+import 'package:space_engineer/redux/game/game_actions.dart';
 
 import 'app/app_state.dart';
 import 'app/app_reducers.dart';
 import 'package:redux/redux.dart';
+import 'package:space_engineer/settings.dart' as settings;
 
 Future<Store<AppState>> createStore() async {
-  return Store<AppState>(
+  var store = Store<AppState>(
     appReducer,
     initialState: AppState.initial(),
     middleware: [
       new LoggingMiddleware.printer(),
     ]
   );
+
+  Timer.periodic(Duration(milliseconds: settings.timerMs), (Timer timer) =>
+      store.dispatch(new TickAction(delta: settings.timerMs)));
+
+  return store;
 }
