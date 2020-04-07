@@ -18,6 +18,7 @@ With all that said, here are a few simple rules:
 
  * No ads.
  * No microtransactions / pay-to-win
+ * No user tracking
 
 ## Code of Conduct
 
