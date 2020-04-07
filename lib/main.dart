@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:i18n_extension/i18n_widget.dart';
 import 'package:redux/redux.dart';
 import 'package:space_engineer/redux/app/app_state.dart';
 import 'package:space_engineer/redux/store.dart';
@@ -36,7 +38,16 @@ class _AppWidget extends State<AppWidget> {
       child: MaterialApp(
         title: 'Space Engineer',
         theme: _theme(),
-        home: Home(),
+        home: I18n(child: Home()),
+        localizationsDelegates: [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: [
+          const Locale('en'),
+          const Locale('nl'),
+        ],
       )
     );
   }

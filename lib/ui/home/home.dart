@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
+import 'package:i18n_extension/i18n_widget.dart';
+import 'home.i18n.dart';
 import '../../redux/app/app_state.dart';
 import 'home_viewmodel.dart';
 
 class Home extends StatefulWidget {
-  final String _title = "Space Engineer";
-
   @override
   _HomeState createState() => _HomeState();
 }
@@ -38,7 +37,7 @@ class _HomeState extends State<Home> {
                     padding: const EdgeInsets.only(right: 8.0),
                   ),
                   Text(
-                    numberOfAsteroids == 1 ? "Mine 1 astroid" : "Mine $numberOfAsteroids astroids",
+                    "Mine %d asteroid".plural(numberOfAsteroids),
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18.0,
@@ -56,7 +55,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget._title),
+        title: Text("Space Engineer".i18n),
       ),
       body: LayoutBuilder(builder: (context, constraints) =>
         Container(
