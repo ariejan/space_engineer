@@ -74,7 +74,7 @@ class _HomeState extends State<Home> {
     return Container(
       child: Column(
         children: <Widget>[
-          _statusBar(resources: viewModel.resources),
+          _statusBar(resources: viewModel.resources, level: viewModel.level),
           Expanded(
             flex: 10,
             child: Text("TODO"),
@@ -92,21 +92,43 @@ class _HomeState extends State<Home> {
 
   Widget _statusBar({
     int resources,
+    int level,
   }) {
     return Container(
       padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 8.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
-          Container(
-            child: FaIcon(FontAwesomeIcons.atom, size: 16.0),
-            padding: const EdgeInsets.only(right: 8.0),
-          ),
-          Text(
-              "$resources",
-              style: TextStyle(
-                fontSize: 18.0,
+          Row(
+            children: <Widget> [
+              Container(
+                child: FaIcon(FontAwesomeIcons.angleDoubleUp, size: 16.0),
+                padding: const EdgeInsets.only(right: 8.0),
+              ),
+              Text(
+                  "$level",
+                  style: TextStyle(
+                    fontSize: 18.0,
+                  )
               )
+            ],
+          ),
+          Expanded(
+            child: Text(""),
+          ),
+          Row(
+            children: <Widget>[
+              Container(
+                child: FaIcon(FontAwesomeIcons.biohazard, size: 16.0),
+                padding: const EdgeInsets.only(right: 8.0),
+              ),
+              Text(
+                  "$resources",
+                  style: TextStyle(
+                    fontSize: 18.0,
+                  )
+              )
+            ],
           )
         ],
       ),

@@ -8,6 +8,7 @@ class HomeViewModel {
   final int resources;
   final bool miningOnCooldown;
   final double miningCooldownFraction;
+  final int level;
 
   final Function() mineAsteroids;
 
@@ -16,6 +17,7 @@ class HomeViewModel {
     this.resources,
     this.miningOnCooldown,
     this.miningCooldownFraction,
+    this.level,
     this.mineAsteroids,
   });
 
@@ -24,7 +26,8 @@ class HomeViewModel {
         numberOfAsteroids: store.state.gameState.numberOfAsteroids,
         resources: store.state.gameState.resources,
         miningOnCooldown: store.state.gameState.miningCooldown > 0,
-        miningCooldownFraction: store.state.gameState.miningCooldown / 1500.0,
+        miningCooldownFraction: store.state.gameState.miningCooldownFraction,
+        level: store.state.gameState.level,
         mineAsteroids: () => store.dispatch(MineAsteroidsAction()),
       );
 }

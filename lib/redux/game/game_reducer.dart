@@ -12,13 +12,16 @@ final gameStateReducer = combineReducers<GameState>([
 
 // _tick is called every 1s and should progress timers, etc.
 GameState _tick(GameState state, TickAction action) {
+  // Mining cooldown
   var miningCooldown = state.miningCooldown - action.delta;
   if (miningCooldown < 0) {
     miningCooldown = 0;
   }
+  var miningCooldownFraction = miningCooldown / settings.miningCooldown;
 
   return state.copyWith(
     miningCooldown: miningCooldown,
+    miningCooldownFraction: miningCooldownFraction,
   );
 }
 
