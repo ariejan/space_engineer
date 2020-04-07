@@ -4,7 +4,7 @@ extension Localization on String {
   static var t = Translations("en") +
     {
       "en": "Space Engineer",
-      "nl": "Space Engineer🇳",
+      "nl": "Space Engineer 🇳🇱",
     } +
     {
       "en": "Mine %d asteroid"
