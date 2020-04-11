@@ -93,13 +93,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "8.8.1"
-  i18n_extension:
-    dependency: "direct main"
-    description:
-      name: i18n_extension
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.3.4"
   image:
     dependency: transitive
     description:
@@ -190,7 +183,7 @@ packages:
     source: hosted
     version: "1.5.5"
   sprintf:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: sprintf
       url: "https://pub.dartlang.org"
@@ -253,4 +246,4 @@ packages:
     source: hosted
     version: "3.5.0"
 sdks:
-  dart: ">=2.6.0-dev <3.0.0"
+  dart: ">=2.4.0 <3.0.0"

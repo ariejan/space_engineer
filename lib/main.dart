@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:i18n_extension/i18n_widget.dart';
 import 'package:redux/redux.dart';
 import 'package:space_engineer/redux/app/app_state.dart';
 import 'package:space_engineer/redux/store.dart';
 
+import 'i18n/i18n.dart';
 import 'ui/home/home.dart';
 
 void main() async {
@@ -38,8 +38,9 @@ class _AppWidget extends State<AppWidget> {
       child: MaterialApp(
         title: 'Space Engineer',
         theme: _theme(),
-        home: I18n(child: Home()),
+        home: Home(),
         localizationsDelegates: [
+          I18n.delegate,
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
