@@ -22,7 +22,7 @@ class _HomeState extends State<Home> {
         alignment: Alignment.bottomCenter,
         child: FlatButton(
           onPressed: miningOnCooldown ? null : mineAsteroids,
-          padding: const EdgeInsets.fromLTRB(24.0, 24.0, 24.0, 36.0),
+          padding: const EdgeInsets.fromLTRB(24.0, 24.0, 24.0, 24.0),
           child: miningOnCooldown
               ?
                 CircularProgressIndicator(
