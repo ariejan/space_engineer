@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:space_engineer/i18n/i18n.dart';
+import 'package:space_engineer/redux/game/cooldown.dart';
 import '../../redux/app/app_state.dart';
 import 'home_viewmodel.dart';
 
@@ -14,19 +15,18 @@ class _HomeState extends State<Home> {
 
   Widget _buildIncrementButton({
     int numberOfAsteroids,
-    bool miningOnCooldown,
-    double miningCooldownFraction,
+    Cooldown miningCooldown,
     Function() mineAsteroids,
   }) {
     return Align(
         alignment: Alignment.bottomCenter,
         child: FlatButton(
-          onPressed: miningOnCooldown ? null : mineAsteroids,
+          onPressed: miningCooldown != null ? null : mineAsteroids,
           padding: const EdgeInsets.fromLTRB(24.0, 24.0, 24.0, 24.0),
-          child: miningOnCooldown
+          child: miningCooldown != null
               ?
                 CircularProgressIndicator(
-                  value: miningCooldownFraction,
+                  value: miningCooldown.progress(),
                 )
               : Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -81,8 +81,7 @@ class _HomeState extends State<Home> {
           ),
           _buildIncrementButton(
             numberOfAsteroids: viewModel.numberOfAsteroids,
-            miningOnCooldown: viewModel.miningOnCooldown,
-            miningCooldownFraction: viewModel.miningCooldownFraction,
+            miningCooldown: viewModel.miningCooldown,
             mineAsteroids: viewModel.mineAsteroids,
           ),
         ],

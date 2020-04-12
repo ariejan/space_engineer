@@ -16,8 +16,11 @@ Future<Store<AppState>> createStore() async {
     ]
   );
 
-  Timer.periodic(Duration(milliseconds: settings.timerMs), (Timer timer) =>
-      store.dispatch(new TickAction(delta: settings.timerMs)));
+  Timer.periodic(Duration(milliseconds: settings.timer), (Timer timer) {
+    if (store.state.gameState.cooldowns.isNotEmpty) {
+      store.dispatch(new TickAction(delta: settings.timer));
+    }
+  });
 
   return store;
 }
