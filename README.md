@@ -16,9 +16,11 @@ Space Engineer is a mobile game. The focus of this project is threefold:
 
 With all that said, here are a few simple rules:
 
- * No ads.
- * No microtransactions / pay-to-win
+ * No ads
+ * No pay-to-win
  * No user tracking
+ * No data mining
+ * No reselling of any user data
 
 ## Code of Conduct
 
