@@ -1,13 +1,15 @@
+import 'dart:convert';
 import 'dart:ui';
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:sprintf/sprintf.dart';
 
 class I18n {
 
-  // Currently used locale
   final Locale locale;
+
+  Map<String, String> _localizedValues;
 
   I18n(this.locale);
 
@@ -15,25 +17,46 @@ class I18n {
     return Localizations.of<I18n>(context, I18n);
   }
 
-  static Map<String, Map<String, String>> _localizedValues = {
-    'en': {
-      'app.title': 'Space Engineer 🇬🇧',
-      'home.btn_mine.zero': 'Nothing to mine...',
-      'home.btn_mine.one': 'Mine one asteroid',
-      'home.btn_mine.many': 'Mine %d asteroids',
-    },
-    'nl': {
-      'app.title': 'Space Engineer 🇳🇱',
-      'home.btn_mine.zero': 'Geen asteroides...',
-      'home.btn_mine.one': 'Eén asteroide afgraven',
-      'home.btn_mine.many': '%d asteroides afgraven',
-    }
-  };
+  Map<String, String> parseJson(Map<String, dynamic> data, List<String> baseKey) {
+    var entries = Map<String, String>();
+
+    data.keys.forEach((key) {
+      List<String> thisKey = List.of(baseKey);
+      thisKey.add(key);
+
+      dynamic value = data[key];
+
+      if (value.runtimeType == String) {
+        entries.putIfAbsent(thisKey.join("."), () => value.toString());
+      } else {
+        entries.addAll(parseJson(value, thisKey));
+      }
+    });
+
+    return entries;
+  }
+
+  Future<bool> load() async {
+    String jsonString =
+      await rootBundle.loadString('i18n/${locale.languageCode}.json');
+
+    Map<String, dynamic> jsonData = json.decode(jsonString);
+
+    _localizedValues = parseJson(jsonData, List<String>());
+    
+    return true;
+  }
 
   // Translates a key to a localized value
   //   I18n.of(context).t('app.title') => "My App"
   String t(String key) {
-    return _localizedValues[locale.languageCode][key];
+    if (_localizedValues.containsKey(key)) {
+      return _localizedValues[key];
+    }
+
+    print("Undefined i18n key: " + key);
+
+    return key;
   }
 
   // Translates a key with a pluralized translation.
@@ -69,8 +92,10 @@ class _I18nDelegate extends LocalizationsDelegate<I18n> {
   bool isSupported(Locale locale) => ['en', 'nl'].contains(locale.languageCode);
 
   @override
-  Future<I18n> load(Locale locale) {
-    return SynchronousFuture<I18n>(I18n(locale));
+  Future<I18n> load(Locale locale) async {
+    I18n localizations = new I18n(locale);
+    await localizations.load();
+    return localizations;
   }
 
   @override

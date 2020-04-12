@@ -14,7 +14,7 @@ description: The blackhole of clicker games...
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.2.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -28,7 +28,7 @@ dependencies:
   font_awesome_flutter: ^8.8.1
   flutter_redux: ^0.6.0
   redux_logging: ^0.4.0
-  sprintf: "^4.0.0"
+  sprintf: ^4.0.0
 
 dev_dependencies:
   flutter_test:
@@ -45,6 +45,10 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+  assets:
+    - i18n/en.json
+    - i18n/nl.json
 
   # To add assets to your application, add an assets section, like this:
   # assets:
