@@ -3,15 +3,15 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:space_engineer/redux/game/cooldown.dart';
 import 'package:space_engineer/redux/app/app_state.dart';
-import 'home_viewmodel.dart';
+import 'mining_view_model.dart';
 import 'package:space_engineer/i18n/translations.dart';
 
-class Home extends StatefulWidget {
+class MiningView extends StatefulWidget {
   @override
-  _HomeState createState() => _HomeState();
+  _MiningViewState createState() => _MiningViewState();
 }
 
-class _HomeState extends State<Home> {
+class _MiningViewState extends State<MiningView> {
 
   Widget _buildIncrementButton({
     int numberOfAsteroids,
@@ -32,7 +32,7 @@ class _HomeState extends State<Home> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Container(
-                    child: FaIcon(FontAwesomeIcons.sun, size: 28.0),
+                    child: FaIcon(FontAwesomeIcons.wrench, size: 28.0),
                     padding: const EdgeInsets.only(right: 8.0),
                   ),
                   Text(
@@ -52,25 +52,18 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Center(
-          child: Text(Translations.of(context).appTitle),
-        ),
-      ),
-      body: LayoutBuilder(builder: (context, constraints) =>
-        Container(
-          color: Colors.black,
-          child: StoreConnector<AppState, HomeViewModel>(
-            builder: (_, viewModel) => content(viewModel, constraints),
-            converter: (store) => HomeViewModel.fromStore(store)
-          ),
+    return LayoutBuilder(builder: (context, constraints) =>
+      Container(
+        color: Colors.black,
+        child: StoreConnector<AppState, MiningViewModel>(
+          builder: (_, viewModel) => content(viewModel, constraints),
+          converter: (store) => MiningViewModel.fromStore(store)
         ),
       ),
     );
   }
 
-  Widget content(HomeViewModel viewModel, BoxConstraints constraints) {
+  Widget content(MiningViewModel viewModel, BoxConstraints constraints) {
     return Container(
       child: Column(
         children: <Widget>[

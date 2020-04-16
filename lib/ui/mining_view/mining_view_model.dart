@@ -3,7 +3,7 @@ import 'package:space_engineer/redux/app/app_state.dart';
 import 'package:space_engineer/redux/game/cooldown.dart';
 import 'package:space_engineer/redux/game/game_actions.dart';
 
-class HomeViewModel {
+class MiningViewModel {
 
   final int numberOfAsteroids;
   final int resources;
@@ -12,7 +12,7 @@ class HomeViewModel {
 
   final Function() mineAsteroids;
 
-  HomeViewModel({
+  MiningViewModel({
     this.numberOfAsteroids,
     this.resources,
     this.miningCooldown,
@@ -20,8 +20,8 @@ class HomeViewModel {
     this.mineAsteroids,
   });
 
-  static HomeViewModel fromStore(Store<AppState> store) {
-    return HomeViewModel(
+  static MiningViewModel fromStore(Store<AppState> store) {
+    return MiningViewModel(
       numberOfAsteroids: store.state.gameState.numberOfAsteroids,
       resources: store.state.gameState.resources,
       miningCooldown: store.state.gameState.cooldowns['mining'],
