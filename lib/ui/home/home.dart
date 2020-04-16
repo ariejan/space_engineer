@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:space_engineer/i18n/i18n.dart';
 import 'package:space_engineer/redux/game/cooldown.dart';
-import '../../redux/app/app_state.dart';
+import 'package:space_engineer/redux/app/app_state.dart';
 import 'home_viewmodel.dart';
+import 'package:space_engineer/i18n/translations.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -36,7 +36,7 @@ class _HomeState extends State<Home> {
                     padding: const EdgeInsets.only(right: 8.0),
                   ),
                   Text(
-                    I18n.of(context).pluralize("home.btn_mine", numberOfAsteroids),
+                    Translations.of(context).btnMineAsteroids(numberOfAsteroids),
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18.0,
@@ -55,7 +55,7 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         title: Center(
-          child: Text(I18n.of(context).t('app.title')),
+          child: Text(Translations.of(context).appTitle),
         ),
       ),
       body: LayoutBuilder(builder: (context, constraints) =>
