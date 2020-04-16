@@ -22,6 +22,13 @@ With all that said, here are a few simple rules:
  * No data mining
  * No reselling of any user data
 
+## Building
+
+Super simplified version, including generating locales.
+
+ 1. flutter pub run /home/ariejan/flutter/flutter/dev/tools/localization/gen_l10n.dart --arb-dir lib/i18n --template-arb-file=messages_en_US.arb --output-localization-file=translations.dart --output-class=Translations
+ 2. flutter run
+
 ## Code of Conduct
 
 We as members, contributors, and leaders pledge to make participation in our community 
