@@ -7,7 +7,14 @@ import 'package:space_engineer/ui/progress_view/progress_view.dart';
 import 'package:space_engineer/ui/research_view/research_view.dart';
 import 'package:space_engineer/ui/mining_view/mining_view.dart';
 
+import 'components/status_bar.dart';
+
 class TabbedView extends StatefulWidget {
+
+  final Color _tabBarBackgroundColor = Colors.black54;
+  final Color _selectedTabColor = Colors.amber;
+  final Color _unSelectedTabColor = Colors.amber.withAlpha(100);
+
   @override
   _TabbedViewState createState() => _TabbedViewState();
 }
@@ -24,34 +31,53 @@ class _TabbedViewState extends State<TabbedView>
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    _tabController.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       appBar: AppBar(
         title: Center(
           child: Text(Translations.of(context).appTitle),
         ),
-        bottom: TabBar(
-          unselectedLabelColor: Colors.amber.shade800,
-          labelColor: Colors.amber.shade50,
-          tabs: [
-            Tab(icon: FaIcon(FontAwesomeIcons.hardHat)),
-            Tab(icon: FaIcon(FontAwesomeIcons.industry)),
-            Tab(icon: FaIcon(FontAwesomeIcons.flask)),
-            Tab(icon: FaIcon(FontAwesomeIcons.seedling)),
-            Tab(icon: FaIcon(FontAwesomeIcons.rocket)),
-          ],
-          controller: _tabController,
-        ),
       ),
-        body: TabBarView(
-          children: [
-            MiningView(),
-            BuildingView(),
-            ResearchView(),
-            EnvironmentView(),
-            ProgressView(),
+        body: Column(
+          children: <Widget>[
+            StatusBar(),
+            Container(
+              color: widget._tabBarBackgroundColor,
+              child: TabBar(
+                unselectedLabelColor: widget._unSelectedTabColor,
+                indicatorColor: widget._selectedTabColor,
+                labelColor: widget._selectedTabColor,
+                tabs: [
+                  Tab(icon: FaIcon(FontAwesomeIcons.hardHat)),
+                  Tab(icon: FaIcon(FontAwesomeIcons.industry)),
+                  Tab(icon: FaIcon(FontAwesomeIcons.flask)),
+                  Tab(icon: FaIcon(FontAwesomeIcons.seedling)),
+                  Tab(icon: FaIcon(FontAwesomeIcons.rocket)),
+                ],
+                controller: _tabController,
+              ),
+            ),
+            Expanded(
+              child: TabBarView(
+                children: [
+                  MiningView(),
+                  BuildingView(),
+                  ResearchView(),
+                  EnvironmentView(),
+                  ProgressView(),
+                ],
+                controller: _tabController,
+              ),
+            ),
           ],
-          controller: _tabController,
         )
     );
   }
