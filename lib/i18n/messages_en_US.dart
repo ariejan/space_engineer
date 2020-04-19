@@ -19,11 +19,9 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en_US';
 
-  static m0(numberOfAsteroids) => "${Intl.plural(numberOfAsteroids, zero: 'No asteroids to mine', one: 'Mine one asteroid', other: 'Mine ${numberOfAsteroids} asteroids')}";
-
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
     "appTitle" : MessageLookupByLibrary.simpleMessage("Space Engineer"),
-    "btnMineAsteroids" : m0
+    "btnEndTurn" : MessageLookupByLibrary.simpleMessage("End turn")
   };
 }

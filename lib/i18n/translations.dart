@@ -102,13 +102,12 @@ class Translations {
     );
   }
 
-  String btnMineAsteroids(int numberOfAsteroids) {
-    return Intl.plural(
-      numberOfAsteroids,
+  String get btnEndTurn {
+    return Intl.message(
+      r'End turn',
       locale: _localeName,
-      name: 'btnMineAsteroids',
-      desc: r'button text to mine asteroids',
-      args: <Object>[numberOfAsteroids]
+      name: 'btnEndTurn',
+      desc: r'end turn button'
     );
   }
 

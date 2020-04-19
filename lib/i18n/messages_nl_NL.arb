@@ -1,4 +1,4 @@
 {
   "appTitle": "Ruimte Ingenieur",
-  "btnMineAsteroids": "{numberOfAsteroids, plural, =0 {Geen asteroïden beschikbaar} =1 {Eén asteroïde afgraven} other {{numberOfAsteroids} asteroïden afgraven}}"
+  "btnEndTurn": "Einde beurt"
 }

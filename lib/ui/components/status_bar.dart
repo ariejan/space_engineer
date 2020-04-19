@@ -35,8 +35,23 @@ class _StatusBarState extends State<StatusBar> {
           Row(
             children: <Widget> [
               Container(
-                child: FaIcon(FontAwesomeIcons.angleDoubleUp, size: 16.0, color: widget._foregroundColor),
+                child: FaIcon(FontAwesomeIcons.checkDouble, size: 16.0, color: widget._foregroundColor),
                 padding: const EdgeInsets.only(right: 8.0),
+              ),
+              Text(
+                  viewModel.turn.toString(),
+                  style: TextStyle(
+                    fontSize: 18.0,
+                    color: widget._foregroundColor,
+                  )
+              )
+            ],
+          ),
+          Row(
+            children: <Widget> [
+              Container(
+                child: FaIcon(FontAwesomeIcons.angleDoubleUp, size: 16.0, color: widget._foregroundColor),
+                padding: const EdgeInsets.only(left: 16.0, right: 8.0),
               ),
               Text(
                   viewModel.level.toString(),
@@ -75,16 +90,19 @@ class StatusBarViewModel {
 
   final int resources;
   final int level;
+  final int turn;
 
   StatusBarViewModel({
     this.resources,
     this.level,
+    this.turn,
   });
 
   static StatusBarViewModel fromStore(Store<AppState> store) {
     return StatusBarViewModel(
       resources: store.state.gameState.resources,
       level: store.state.gameState.level,
+      turn: store.state.gameState.turn,
     );
   }
 }

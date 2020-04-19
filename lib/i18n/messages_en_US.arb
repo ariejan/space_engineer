@@ -5,12 +5,9 @@
     "description": "Application title"
   },
 
-  "btnMineAsteroids": "{numberOfAsteroids, plural, =0 {No asteroids to mine} =1 {Mine one asteroid} other {Mine {numberOfAsteroids} asteroids}}",
-  "@btnMineAsteroids": {
+  "btnEndTurn": "End turn",
+  "@btnEndTurn": {
     "type": "text",
-    "description": "button text to mine asteroids",
-    "placeholders": {
-      "numberOfAsteroids": {}
-    }
+    "description": "end turn button"
   }
 }
