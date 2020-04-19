@@ -4,26 +4,36 @@ import 'package:meta/meta.dart';
 class GameState {
 
   final int numberOfAsteroids;
-  final int resources;
+
+  final int fuel;
+  final int metal;
+  final int carbon;
+
   final int level;
   final int turn;
 
   GameState({
     this.numberOfAsteroids,
-    this.resources,
+    this.fuel,
+    this.metal,
+    this.carbon,
     this.level,
     this.turn,
   });
 
   GameState copyWith({
     int numberOfAsteroids,
-    int resources,
+    int fuel,
+    int metal,
+    int carbon,
     int level,
     int turn,
   }) {
     return GameState(
       numberOfAsteroids: numberOfAsteroids ?? this.numberOfAsteroids,
-      resources: resources ?? this.resources,
+      fuel: fuel ?? this.fuel,
+      metal: metal ?? this.metal,
+      carbon: carbon ?? this.carbon,
       level: level ?? this.level,
       turn: turn ?? this.turn,
     );
@@ -32,7 +42,9 @@ class GameState {
   factory GameState.initial() {
     return GameState(
       numberOfAsteroids: 1,
-      resources: 0,
+      fuel: 0,
+      metal: 1000,
+      carbon: 1000,
       level: 1,
       turn: 1,
     );

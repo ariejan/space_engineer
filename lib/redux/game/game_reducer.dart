@@ -13,7 +13,10 @@ GameState _endTurn(GameState state, EndTurnAction action) {
   print("Handling end-of-turn");
 
   return state.copyWith(
-    resources: ((state.resources + 10) * 1.2).floor(),
+    // TODO: Update resources
+    fuel: state.fuel + 50,
+    metal: state.metal + 100,
+    carbon: state.carbon + 100,
     turn: state.turn + 1,
   );
 }
