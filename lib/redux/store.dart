@@ -16,8 +16,5 @@ Future<Store<AppState>> createStore() async {
     ]
   );
 
-  Timer.periodic(Duration(milliseconds: settings.timerMs), (Timer timer) =>
-      store.dispatch(new TickAction(delta: settings.timerMs)));
-
   return store;
 }

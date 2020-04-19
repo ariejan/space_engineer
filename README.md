@@ -16,8 +16,18 @@ Space Engineer is a mobile game. The focus of this project is threefold:
 
 With all that said, here are a few simple rules:
 
- * No ads.
- * No microtransactions / pay-to-win
+ * No ads
+ * No pay-to-win
+ * No user tracking
+ * No data mining
+ * No reselling of any user data
+
+## Building
+
+Super simplified version, including generating locales.
+
+ 1. flutter pub run /home/ariejan/flutter/flutter/dev/tools/localization/gen_l10n.dart --arb-dir lib/i18n --template-arb-file=messages_en_US.arb --output-localization-file=translations.dart --output-class=Translations
+ 2. flutter run
 
 ## Code of Conduct
 

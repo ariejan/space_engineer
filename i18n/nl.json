@@ -1,0 +1,12 @@
+{
+  "app": {
+    "title": "Ruimte Ingenieur"
+  },
+  "home": {
+    "btn_mine": {
+      "zero": "Geen asteroïden beschikbaar",
+      "one": "Eén asteroïde afgraven",
+      "many": "%d asteroïden afgraven"
+    }
+  }
+}

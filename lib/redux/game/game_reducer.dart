@@ -6,28 +6,14 @@ import 'game_state.dart';
 import 'package:space_engineer/settings.dart' as settings;
 
 final gameStateReducer = combineReducers<GameState>([
-  TypedReducer<GameState, MineAsteroidsAction>(_mineAsteroids),
-  TypedReducer<GameState, TickAction>(_tick),
+  TypedReducer<GameState, EndTurnAction>(_endTurn),
 ]);
 
-// _tick is called every 1s and should progress timers, etc.
-GameState _tick(GameState state, TickAction action) {
-  // Mining cooldown
-  var miningCooldown = state.miningCooldown - action.delta;
-  if (miningCooldown < 0) {
-    miningCooldown = 0;
-  }
-  var miningCooldownFraction = miningCooldown / settings.miningCooldown;
+GameState _endTurn(GameState state, EndTurnAction action) {
+  print("Handling end-of-turn");
 
   return state.copyWith(
-    miningCooldown: miningCooldown,
-    miningCooldownFraction: miningCooldownFraction,
-  );
-}
-
-GameState _mineAsteroids(GameState state, MineAsteroidsAction action) {
-  return state.copyWith(
-    resources: state.resources + (10 * state.numberOfAsteroids),
-    miningCooldown: settings.miningCooldown,
+    resources: ((state.resources + 10) * 1.2).floor(),
+    turn: state.turn + 1,
   );
 }

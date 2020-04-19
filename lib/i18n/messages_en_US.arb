@@ -1,0 +1,13 @@
+{
+  "appTitle": "Space Engineer",
+  "@appTitle": {
+    "type": "text",
+    "description": "Application title"
+  },
+
+  "btnEndTurn": "End turn",
+  "@btnEndTurn": {
+    "type": "text",
+    "description": "end turn button"
+  }
+}

@@ -14,25 +14,25 @@ import 'package:space_engineer/redux/app/app_reducers.dart';
 import 'package:space_engineer/redux/app/app_state.dart';
 
 void main() {
-  testWidgets('Counter increment score by 10', (WidgetTester tester) async {
-    final store = Store<AppState>(
-      appReducer,
-      initialState: AppState.initial(),
-    );
-
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(StoreProvider(store: store, child: AppWidget(store)));
-
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('10'), findsNothing);
-
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.text("Mine 1 astroid"));
-    await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('10'), findsOneWidget);
-  });
+//  testWidgets('Counter increment score by 10', (WidgetTester tester) async {
+//    final store = Store<AppState>(
+//      appReducer,
+//      initialState: AppState.initial(),
+//    );
+//
+//    // Build our app and trigger a frame.
+//    await tester.pumpWidget(StoreProvider(store: store, child: AppWidget(store)));
+//
+//    // Verify that our counter starts at 0.
+//    expect(find.text('0'), findsOneWidget);
+//    expect(find.text('10'), findsNothing);
+//
+//    // Tap the '+' icon and trigger a frame.
+//    await tester.tap(find.text("Mine 1 astroid"));
+//    await tester.pump();
+//
+//    // Verify that our counter has incremented.
+//    expect(find.text('0'), findsNothing);
+//    expect(find.text('10'), findsOneWidget);
+//  });
 }

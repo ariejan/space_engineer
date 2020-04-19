@@ -4,7 +4,9 @@ import 'package:redux/redux.dart';
 import 'package:space_engineer/redux/app/app_state.dart';
 import 'package:space_engineer/redux/store.dart';
 
-import 'ui/home/home.dart';
+import 'i18n/translations.dart';
+import 'ui/mining_view/mining_view.dart';
+import 'ui/tabbed_view.dart';
 
 void main() async {
   var store = await createStore();
@@ -36,7 +38,9 @@ class _AppWidget extends State<AppWidget> {
       child: MaterialApp(
         title: 'Space Engineer',
         theme: _theme(),
-        home: Home(),
+        home: TabbedView(),
+        localizationsDelegates: Translations.localizationsDelegates,
+        supportedLocales: Translations.supportedLocales,
       )
     );
   }

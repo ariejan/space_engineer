@@ -5,31 +5,27 @@ class GameState {
 
   final int numberOfAsteroids;
   final int resources;
-  final int miningCooldown;
-  final double miningCooldownFraction;
   final int level;
+  final int turn;
 
   GameState({
     this.numberOfAsteroids,
     this.resources,
-    this.miningCooldown,
-    this.miningCooldownFraction,
     this.level,
+    this.turn,
   });
 
   GameState copyWith({
     int numberOfAsteroids,
     int resources,
-    int miningCooldown,
-    double miningCooldownFraction,
     int level,
+    int turn,
   }) {
     return GameState(
       numberOfAsteroids: numberOfAsteroids ?? this.numberOfAsteroids,
       resources: resources ?? this.resources,
-      miningCooldown: miningCooldown ?? this.miningCooldown,
-      miningCooldownFraction: miningCooldownFraction ?? this.miningCooldownFraction,
       level: level ?? this.level,
+      turn: turn ?? this.turn,
     );
   }
 
@@ -37,9 +33,8 @@ class GameState {
     return GameState(
       numberOfAsteroids: 1,
       resources: 0,
-      miningCooldown: 0,
-      miningCooldownFraction: 0.0,
       level: 1,
+      turn: 1,
     );
   }
 }

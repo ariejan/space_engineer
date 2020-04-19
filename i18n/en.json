@@ -1,0 +1,12 @@
+{
+  "app": {
+    "title": "Space Engineer"
+  },
+  "home": {
+    "btn_mine": {
+      "zero": "No asteroids to mine",
+      "one": "Mine 1 asteroid",
+      "many": "Mine %d asteroids"
+    }
+  }
+}
